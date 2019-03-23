@@ -14,8 +14,10 @@ b = 5.4
 println a + a - b
 
 # BOOLEAN OPERATIONS
-println a > b
 println a < b
+println a <= b
+println a > b
+println a >= b
 println a == b
 println a not b
 println a not b and a < b
