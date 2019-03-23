@@ -1,3 +1,9 @@
+# PRIMITIVE TYPES
+i = 3       # INTEGER
+f = 3.5     # FLOAT
+s = 'text'  # STRING
+b = True    # BOOLEAN
+
 # PRINT COMMAND
 print 'text\n'
 println 2 + 2 - 6 * 9 / 2
@@ -6,12 +12,6 @@ println 2 + 2 - 6 * 9 / 2
 a = 3
 b = 5.4
 println a + a - b
-
-# PRIMITIVE TYPES
-i = 3       # INTEGER
-f = 3.5     # FLOAT
-t = 'text'  # TEXT
-b = True    # BOOLEAN
 
 # BOOLEAN OPERATIONS
 println a > b
