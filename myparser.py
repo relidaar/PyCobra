@@ -1,17 +1,21 @@
-from rply import ParserGenerator
+import ast
 
-from ast import Program, Integer, Float, String, Boolean
+from rply import ParserGenerator
 from lexer import lexer
 from tokens import token_dict
 
 pg = ParserGenerator(
-    token_dict.keys()
+    token_dict.keys(),
+    precedence=[
+        ('left', ['PLUS', 'MINUS']),
+        ('left', ['MUL', 'DIV'])
+    ]
 )
 
 
 @pg.production('program : expressions')
 def program(p):
-    return Program(p[0])
+    return ast.Program(p[0])
 
 
 @pg.production('expressions : expression')
@@ -24,24 +28,45 @@ def add_expression(p):
     return p[0] + [p[1]]
 
 
+@pg.production('expression : expression PLUS expression')
+@pg.production('expression : expression MINUS expression')
+@pg.production('expression : expression MUL expression')
+@pg.production('expression : expression DIV expression')
+@pg.production('expression : expression MOD expression')
+def calculate(p):
+    left = p[0]
+    operator = p[1].gettokentype()
+    right = p[2]
+
+    mapping = {
+        'PLUS': ast.Add,
+        'MINUS': ast.Subtract,
+        'MUL': ast.Multiply,
+        'DIV': ast.Divide,
+        'MOD': ast.Modulo,
+    }
+
+    return mapping[operator](left, right)
+
+
 @pg.production('expression : INTEGER')
-def integer(p):
-    return Integer(p[0].value)
+def get_integer(p):
+    return ast.Integer(p[0].value, 'Integer')
 
 
 @pg.production('expression : FLOAT')
-def integer(p):
-    return Float(p[0].value)
+def get_float(p):
+    return ast.Float(p[0].value, 'Float')
 
 
 @pg.production('expression : STRING')
-def integer(p):
-    return String(p[0].value)
+def get_string(p):
+    return ast.String(p[0].value, 'String')
 
 
 @pg.production('expression : BOOLEAN')
-def integer(p):
-    return Boolean(p[0].value)
+def get_boolean(p):
+    return ast.Boolean(p[0].value, 'Boolean')
 
 
 parser = pg.build()

@@ -9,6 +9,7 @@ for key, value in token_dict.items():
 
 lg.ignore(r'\s+')
 lg.ignore(r'\n')
+lg.ignore(r'\#.*?\n')
 
 lexer = lg.build()
 

@@ -8,6 +8,9 @@ b = True    # BOOLEAN
 print 'text\n'
 println 2 + 2 - 6 * 9 / 2
 
+# COMMENTS
+# comment   # SINGLE-LINE COMMENT
+
 # VARIABLES
 a = 3
 b = 5.4
