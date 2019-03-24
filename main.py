@@ -1,9 +1,9 @@
-from lexer import lexer
-from myparser import parser
+from interpreter.lexer import lexer
+from interpreter.myparser import parser
 
 
 def main():
-    filename = 'test.cb'
+    filename = r'files\test.cb'
     with open(filename) as f:
         text_input = f.read()
 

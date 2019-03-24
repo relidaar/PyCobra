@@ -1,8 +1,8 @@
-import ast
+from interpreter.data import ast
 
 from rply import ParserGenerator
-from lexer import lexer
-from tokens import token_dict
+from interpreter.lexer import lexer
+from interpreter.data.tokens import token_dict
 
 pg = ParserGenerator(
     token_dict.keys(),
@@ -72,7 +72,7 @@ def get_boolean(p):
 parser = pg.build()
 
 if __name__ == '__main__':
-    filename = 'test.cb'
+    filename = r'.\files\test.cb'
     with open(filename) as f:
         text_input = f.read()
 

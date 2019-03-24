@@ -1,6 +1,6 @@
 from rply import LexerGenerator
 
-from tokens import token_dict
+from interpreter.data.tokens import token_dict
 
 lg = LexerGenerator()
 
@@ -14,7 +14,7 @@ lg.ignore(r'\#.*?\n')
 lexer = lg.build()
 
 if __name__ == '__main__':
-    filename = 'test.cb'
+    filename = r'.\files\test.cb'
     with open(filename) as f:
         text_input = f.read()
 
