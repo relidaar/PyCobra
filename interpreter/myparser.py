@@ -13,9 +13,27 @@ pg = ParserGenerator(
 )
 
 
-@pg.production('program : expressions')
+@pg.production('program : statements')
 def program(p):
     return ast.Program(p[0])
+
+
+@pg.production('statements : statement')
+def get_statement(p):
+    return [p[0]]
+
+
+@pg.production('statements : statements statement')
+def add_statement(p):
+    return p[0] + [p[1]]
+
+
+# @pg.production('statement : PRINTLN expression')
+# @pg.production('statement : PRINT expression')
+# def print_statement(p):
+#     value = p[1]
+#     operator = p[0].gettokentype()
+#     return ast.Print(value, True if operator == 'PRINTLN' else False)
 
 
 @pg.production('expressions : expression')

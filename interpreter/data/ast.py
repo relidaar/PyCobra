@@ -4,22 +4,20 @@ import attr
 @attr.s
 class Program:
     """Entry point for parser"""
-    expressions = attr.ib()
+    statements = attr.ib()
 
     def eval(self):
-        for expression in self.expressions:
-            value = expression.eval()
-            print(value)
+        for statement in self.statements:
+            statement.eval()
 
     def eval_debug(self):
-        for expression in self.expressions:
-            value = expression.eval()
+        for statement in self.statements:
+            value = statement.eval()
             print('{}: {}'.format(type(value), value))
 
     def eval_test(self):
-        for expression in self.expressions:
-            value = expression.eval()
-            return value
+        for statement in self.statements:
+            return statement.eval()
 
 
 @attr.s
@@ -92,3 +90,16 @@ class Divide(BinaryOperation):
 class Modulo(BinaryOperation):
     def eval(self):
         return self.left.eval() % self.right.eval()
+
+
+@attr.s
+class Print:
+    value = attr.ib()
+    newline = attr.ib()
+
+    def eval(self):
+        if self.newline:
+            print(self.value)
+        else:
+            print(self.value, end='')
+
