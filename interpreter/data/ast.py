@@ -9,7 +9,17 @@ class Program:
     def eval(self):
         for expression in self.expressions:
             value = expression.eval()
+            print(value)
+
+    def eval_debug(self):
+        for expression in self.expressions:
+            value = expression.eval()
             print('{}: {}'.format(type(value), value))
+
+    def eval_test(self):
+        for expression in self.expressions:
+            value = expression.eval()
+            return value
 
 
 @attr.s
@@ -44,7 +54,7 @@ class Boolean(Type):
     """Representing the boolean type"""
 
     def eval(self):
-        return bool(self.value)
+        return self.value == 'True'
 
 
 @attr.s

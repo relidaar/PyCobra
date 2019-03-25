@@ -1,6 +1,6 @@
 token_dict = {
     # TYPES
-    'FLOAT': r'\d*\.\d+|\-\d*\.\d+',
+    'FLOAT': r'\d+\.\d+|\-\d+\.\d+',
     'INTEGER': r'\d+|-\d+',
     'BOOLEAN': r'True|False',
     'STRING': r'\".*?\"',
