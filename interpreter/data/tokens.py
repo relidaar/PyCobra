@@ -11,10 +11,10 @@ token_dict = {
     'MUL': r'\*',
     'DIV': r'\/',
     'MOD': r'\%',
-    #
-    # # OPERATORS
-    # 'PRINT': 'print',
-    # 'PRINTLN': 'println',
+
+    # OPERATORS
+    'PRINTLN': r'println',
+    'PRINT': r'print',
 }
 
 if __name__ == '__main__':

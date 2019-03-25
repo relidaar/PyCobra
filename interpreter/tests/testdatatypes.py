@@ -1,6 +1,6 @@
 from unittest import TestCase
+
 from interpreter.lexer import lexer
-from interpreter.myparser import parser
 
 
 class TestLexerDataTypes(TestCase):

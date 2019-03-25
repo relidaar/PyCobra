@@ -1,13 +1,13 @@
 from unittest import TestCase
+
 from interpreter.lexer import lexer
-from interpreter.myparser import parser
 
 
 class TestLexerCalculation(TestCase):
     def test_tokenize_plus(self):
         # FOR TWO INTEGERS
-        text_input = '1 + 1'
-        tokens = list(lexer.lex(text_input))
+        input_text = '1 + 1'
+        tokens = list(lexer.lex(input_text))
 
         tokens_result = ' '.join(token.gettokentype() for token in tokens)
         result = 'INTEGER PLUS INTEGER'
@@ -15,8 +15,8 @@ class TestLexerCalculation(TestCase):
         self.assertEqual(tokens_result, result)
 
         # FOR TWO FLOATS
-        text_input = '1.5 + 1.5'
-        tokens = list(lexer.lex(text_input))
+        input_text = '1.5 + 1.5'
+        tokens = list(lexer.lex(input_text))
 
         tokens_result = ' '.join(token.gettokentype() for token in tokens)
         result = 'FLOAT PLUS FLOAT'
@@ -24,8 +24,8 @@ class TestLexerCalculation(TestCase):
         self.assertEqual(tokens_result, result)
 
         # FOR BOTH FLOAT AND INTEGER
-        text_input = '1 + 1.5'
-        tokens = list(lexer.lex(text_input))
+        input_text = '1 + 1.5'
+        tokens = list(lexer.lex(input_text))
 
         tokens_result = ' '.join(token.gettokentype() for token in tokens)
         result = 'INTEGER PLUS FLOAT'
@@ -33,8 +33,8 @@ class TestLexerCalculation(TestCase):
         self.assertEqual(tokens_result, result)
 
         # FOR TWO STRINGS
-        text_input = '"Some text " + "and another text"'
-        tokens = list(lexer.lex(text_input))
+        input_text = '"Some text " + "and another text"'
+        tokens = list(lexer.lex(input_text))
 
         tokens_result = ' '.join(token.gettokentype() for token in tokens)
         result = 'STRING PLUS STRING'
@@ -42,8 +42,8 @@ class TestLexerCalculation(TestCase):
         self.assertEqual(tokens_result, result)
 
         # FOR BOTH STRING AND INTEGER
-        text_input = '"Some text " + 1'
-        tokens = list(lexer.lex(text_input))
+        input_text = '"Some text " + 1'
+        tokens = list(lexer.lex(input_text))
 
         tokens_result = ' '.join(token.gettokentype() for token in tokens)
         result = 'STRING PLUS INTEGER'
@@ -51,8 +51,8 @@ class TestLexerCalculation(TestCase):
         self.assertEqual(tokens_result, result)
 
         # FOR BOTH STRING AND FLOAT
-        text_input = '"Some text " + 1.5'
-        tokens = list(lexer.lex(text_input))
+        input_text = '"Some text " + 1.5'
+        tokens = list(lexer.lex(input_text))
 
         tokens_result = ' '.join(token.gettokentype() for token in tokens)
         result = 'STRING PLUS FLOAT'
@@ -61,8 +61,8 @@ class TestLexerCalculation(TestCase):
 
     def test_tokenize_minus(self):
         # FOR TWO INTEGERS
-        text_input = '1 - 1'
-        tokens = list(lexer.lex(text_input))
+        input_text = '1 - 1'
+        tokens = list(lexer.lex(input_text))
 
         tokens_result = ' '.join(token.gettokentype() for token in tokens)
         result = 'INTEGER MINUS INTEGER'
@@ -70,8 +70,8 @@ class TestLexerCalculation(TestCase):
         self.assertEqual(tokens_result, result)
 
         # FOR TWO FLOATS
-        text_input = '1.5 - 1.5'
-        tokens = list(lexer.lex(text_input))
+        input_text = '1.5 - 1.5'
+        tokens = list(lexer.lex(input_text))
 
         tokens_result = ' '.join(token.gettokentype() for token in tokens)
         result = 'FLOAT MINUS FLOAT'
@@ -79,8 +79,8 @@ class TestLexerCalculation(TestCase):
         self.assertEqual(tokens_result, result)
 
         # FOR BOTH FLOAT AND INTEGER
-        text_input = '1 - 1.5'
-        tokens = list(lexer.lex(text_input))
+        input_text = '1 - 1.5'
+        tokens = list(lexer.lex(input_text))
 
         tokens_result = ' '.join(token.gettokentype() for token in tokens)
         result = 'INTEGER MINUS FLOAT'
@@ -89,8 +89,8 @@ class TestLexerCalculation(TestCase):
 
     def test_tokenize_mul(self):
         # FOR TWO INTEGERS
-        text_input = '1 * 1'
-        tokens = list(lexer.lex(text_input))
+        input_text = '1 * 1'
+        tokens = list(lexer.lex(input_text))
 
         tokens_result = ' '.join(token.gettokentype() for token in tokens)
         result = 'INTEGER MUL INTEGER'
@@ -98,8 +98,8 @@ class TestLexerCalculation(TestCase):
         self.assertEqual(tokens_result, result)
 
         # FOR TWO FLOATS
-        text_input = '1.5 * 1.5'
-        tokens = list(lexer.lex(text_input))
+        input_text = '1.5 * 1.5'
+        tokens = list(lexer.lex(input_text))
 
         tokens_result = ' '.join(token.gettokentype() for token in tokens)
         result = 'FLOAT MUL FLOAT'
@@ -107,8 +107,8 @@ class TestLexerCalculation(TestCase):
         self.assertEqual(tokens_result, result)
 
         # FOR BOTH FLOAT AND INTEGER
-        text_input = '1 * 1.5'
-        tokens = list(lexer.lex(text_input))
+        input_text = '1 * 1.5'
+        tokens = list(lexer.lex(input_text))
 
         tokens_result = ' '.join(token.gettokentype() for token in tokens)
         result = 'INTEGER MUL FLOAT'
@@ -116,8 +116,8 @@ class TestLexerCalculation(TestCase):
         self.assertEqual(tokens_result, result)
 
         # FOR BOTH STRING AND INTEGER
-        text_input = '"Some text" * 1'
-        tokens = list(lexer.lex(text_input))
+        input_text = '"Some text" * 1'
+        tokens = list(lexer.lex(input_text))
 
         tokens_result = ' '.join(token.gettokentype() for token in tokens)
         result = 'STRING MUL INTEGER'
@@ -126,8 +126,8 @@ class TestLexerCalculation(TestCase):
 
     def test_tokenize_div(self):
         # FOR TWO INTEGERS
-        text_input = '1 / 1'
-        tokens = list(lexer.lex(text_input))
+        input_text = '1 / 1'
+        tokens = list(lexer.lex(input_text))
 
         tokens_result = ' '.join(token.gettokentype() for token in tokens)
         result = 'INTEGER DIV INTEGER'
@@ -135,8 +135,8 @@ class TestLexerCalculation(TestCase):
         self.assertEqual(tokens_result, result)
 
         # FOR TWO FLOATS
-        text_input = '1.5 / 1.5'
-        tokens = list(lexer.lex(text_input))
+        input_text = '1.5 / 1.5'
+        tokens = list(lexer.lex(input_text))
 
         tokens_result = ' '.join(token.gettokentype() for token in tokens)
         result = 'FLOAT DIV FLOAT'
@@ -144,8 +144,8 @@ class TestLexerCalculation(TestCase):
         self.assertEqual(tokens_result, result)
 
         # FOR BOTH FLOAT AND INTEGER
-        text_input = '1 / 1.5'
-        tokens = list(lexer.lex(text_input))
+        input_text = '1 / 1.5'
+        tokens = list(lexer.lex(input_text))
 
         tokens_result = ' '.join(token.gettokentype() for token in tokens)
         result = 'INTEGER DIV FLOAT'
@@ -154,8 +154,8 @@ class TestLexerCalculation(TestCase):
 
     def test_tokenize_mod(self):
         # FOR TWO INTEGERS
-        text_input = '1 % 1'
-        tokens = list(lexer.lex(text_input))
+        input_text = '1 % 1'
+        tokens = list(lexer.lex(input_text))
 
         tokens_result = ' '.join(token.gettokentype() for token in tokens)
         result = 'INTEGER MOD INTEGER'
@@ -163,8 +163,8 @@ class TestLexerCalculation(TestCase):
         self.assertEqual(tokens_result, result)
 
         # FOR TWO FLOATS
-        text_input = '1.5 % 1.5'
-        tokens = list(lexer.lex(text_input))
+        input_text = '1.5 % 1.5'
+        tokens = list(lexer.lex(input_text))
 
         tokens_result = ' '.join(token.gettokentype() for token in tokens)
         result = 'FLOAT MOD FLOAT'
@@ -172,8 +172,8 @@ class TestLexerCalculation(TestCase):
         self.assertEqual(tokens_result, result)
 
         # FOR BOTH FLOAT AND INTEGER
-        text_input = '1 % 1.5'
-        tokens = list(lexer.lex(text_input))
+        input_text = '1 % 1.5'
+        tokens = list(lexer.lex(input_text))
 
         tokens_result = ' '.join(token.gettokentype() for token in tokens)
         result = 'INTEGER MOD FLOAT'
