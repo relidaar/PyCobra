@@ -24,7 +24,6 @@ class Program:
 class Type:
     """Representing the abstract type"""
     value = attr.ib()
-    type = attr.ib()
 
 
 class Integer(Type):
@@ -63,13 +62,7 @@ class BinaryOperation:
 
 class Add(BinaryOperation):
     def eval(self):
-        left = self.left.eval()
-        right = self.right.eval()
-
-        left = str(left) if self.right.type == 'String' else left
-        right = str(right) if self.left.type == 'String' else right
-
-        return left + right
+        return self.left.eval() + self.right.eval()
 
 
 class Subtract(BinaryOperation):
@@ -98,8 +91,9 @@ class Print:
     newline = attr.ib()
 
     def eval(self):
+        value = self.value.eval()
         if self.newline:
-            print(self.value)
+            print(value)
         else:
-            print(self.value, end='')
+            print(value, end='')
 

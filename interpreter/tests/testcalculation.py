@@ -41,24 +41,6 @@ class TestLexerCalculation(TestCase):
 
         self.assertEqual(tokens_result, result)
 
-        # FOR BOTH STRING AND INTEGER
-        input_text = '"Some text " + 1'
-        tokens = list(lexer.lex(input_text))
-
-        tokens_result = ' '.join(token.gettokentype() for token in tokens)
-        result = 'STRING PLUS INTEGER'
-
-        self.assertEqual(tokens_result, result)
-
-        # FOR BOTH STRING AND FLOAT
-        input_text = '"Some text " + 1.5'
-        tokens = list(lexer.lex(input_text))
-
-        tokens_result = ' '.join(token.gettokentype() for token in tokens)
-        result = 'STRING PLUS FLOAT'
-
-        self.assertEqual(tokens_result, result)
-
     def test_tokenize_minus(self):
         # FOR TWO INTEGERS
         input_text = '1 - 1'
