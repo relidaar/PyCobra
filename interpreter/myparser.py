@@ -72,7 +72,7 @@ def get_boolean(p):
 parser = pg.build()
 
 if __name__ == '__main__':
-    filename = r'.\files\test.cb'
+    filename = r'..\files\test.cb'
     with open(filename) as f:
         text_input = f.read()
 
