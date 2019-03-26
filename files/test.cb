@@ -1,4 +1,7 @@
-a = 10
-println 5 + a / 5 * 2
-
-println 10 < 5
+a = 10 not 5
+b = 10 < 5
+println a
+println b
+println a and b
+println a or b
+println a == b

@@ -7,6 +7,10 @@ pg = ParserGenerator(
     token_dict.keys(),
     precedence=[
         ('left', ['PRINTLN', 'PRINT']),
+        ('left', ['AND', 'OR']),
+        ('left', ['EQ', 'NOT']),
+        ('left', ['GT', 'GTEQ']),
+        ('left', ['LT', 'LTEQ']),
         ('left', ['PLUS', 'MINUS']),
         ('left', ['MUL', 'DIV', 'MOD'])
     ]
@@ -51,37 +55,67 @@ def get_variable(p):
 @pg.production('expression : expression MUL expression')
 @pg.production('expression : expression DIV expression')
 @pg.production('expression : expression MOD expression')
+def calculate(p):
+    operator = p[1].gettokentype()
+    left = p[0]
+    right = p[2]
+
+    mapping = {
+        'PLUS': ast.Addition,
+        'MINUS': ast.Subtraction,
+        'MUL': ast.Multiplication,
+        'DIV': ast.Division,
+        'MOD': ast.Modulo,
+    }
+
+    return mapping[operator](left, right)
+
+
 @pg.production('expression : expression EQ expression')
-@pg.production('expression : expression NEQ expression')
 @pg.production('expression : expression LT expression')
 @pg.production('expression : expression LTEQ expression')
 @pg.production('expression : expression GT expression')
 @pg.production('expression : expression GTEQ expression')
+@pg.production('expression : expression NOT expression')
+@pg.production('expression : expression AND expression')
+@pg.production('expression : expression OR expression')
 def calculate(p):
-    operator = p[1].value
+    operator = p[1].gettokentype()
     left = p[0]
     right = p[2]
-    return ast.BinaryExpression(left, right, operator)
+
+    mapping = {
+        'EQ': ast.Equals,
+        'LT': ast.LessThan,
+        'LTEQ': ast.LessThanOrEquals,
+        'GT': ast.GreaterThan,
+        'GTEQ': ast.GreaterThanOrEquals,
+        'NOT': ast.NotEqual,
+        'AND': ast.And,
+        'OR': ast.Or,
+    }
+
+    return mapping[operator](left, right)
 
 
 @pg.production('expression : INTEGER')
 def get_integer(p):
-    return ast.Integer('Integer', p[0].value)
+    return ast.Integer(p[0].value)
 
 
 @pg.production('expression : FLOAT')
-def get_float(p):
-    return ast.Float('Float', p[0].value)
+def get_integer(p):
+    return ast.Float(p[0].value)
 
 
 @pg.production('expression : STRING')
-def get_string(p):
-    return ast.String('String', p[0].value)
+def get_integer(p):
+    return ast.String(p[0].value)
 
 
 @pg.production('expression : BOOLEAN')
-def get_boolean(p):
-    return ast.Boolean('Boolean', p[0].value)
+def get_integer(p):
+    return ast.Boolean(p[0].value)
 
 
 parser = pg.build()

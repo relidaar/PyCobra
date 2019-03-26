@@ -24,35 +24,25 @@ class Program:
 
 @attr.s
 class Type:
-    """Representing the abstract type"""
-    type = attr.ib()
     value = attr.ib()
 
 
 class Integer(Type):
-    """Representing the integer type"""
-
     def eval(self):
         return int(self.value)
 
 
 class Float(Type):
-    """Representing the float type"""
-
     def eval(self):
-        return float(self.value)
+        return int(self.value)
 
 
 class String(Type):
-    """Representing the string type"""
-
     def eval(self):
         return self.value[1:-1]
 
 
 class Boolean(Type):
-    """Representing the boolean type"""
-
     def eval(self):
         return self.value == 'True'
 
@@ -61,24 +51,71 @@ class Boolean(Type):
 class BinaryExpression:
     left = attr.ib()
     right = attr.ib()
-    operator = attr.ib()
 
+
+class Addition(BinaryExpression):
     def eval(self):
-        left = self.left.eval()
-        right = self.right.eval()
-        mapping = {
-            '+': left + right,
-            '-': left - right,
-            '*': left * right,
-            '/': left / right,
-            '==': left == right,
-            '!=': left != right,
-            '>=': left >= right,
-            '<=': left <= right,
-            '>': left > right,
-            '<': left < right,
-        }
-        return mapping[self.operator]
+        return self.left.eval() + self.right.eval()
+
+
+class Subtraction(BinaryExpression):
+    def eval(self):
+        return self.left.eval() - self.right.eval()
+
+
+class Multiplication(BinaryExpression):
+    def eval(self):
+        return self.left.eval() * self.right.eval()
+
+
+class Division(BinaryExpression):
+    def eval(self):
+        return self.left.eval() / self.right.eval()
+
+
+class Modulo(BinaryExpression):
+    def eval(self):
+        return self.left.eval() % self.right.eval()
+
+
+class Equals(BinaryExpression):
+    def eval(self):
+        return self.left.eval() == self.right.eval()
+
+
+class NotEqual(BinaryExpression):
+    def eval(self):
+        return self.left.eval() != self.right.eval()
+
+
+class LessThan(BinaryExpression):
+    def eval(self):
+        return self.left.eval() < self.right.eval()
+
+
+class LessThanOrEquals(BinaryExpression):
+    def eval(self):
+        return self.left.eval() <= self.right.eval()
+
+
+class GreaterThan(BinaryExpression):
+    def eval(self):
+        return self.left.eval() > self.right.eval()
+
+
+class GreaterThanOrEquals(BinaryExpression):
+    def eval(self):
+        return self.left.eval() >= self.right.eval()
+
+
+class And(BinaryExpression):
+    def eval(self):
+        return self.left.eval() and self.right.eval()
+
+
+class Or(BinaryExpression):
+    def eval(self):
+        return self.left.eval() or self.right.eval()
 
 
 @attr.s
@@ -100,14 +137,7 @@ class Assignment:
     expression = attr.ib()
 
     def eval(self):
-        type = self.expression.type
-        value = self.expression.value
-        mapping = {
-            'Integer': int(value),
-            'Float': float(value),
-            'Boolean': value == 'True',
-        }
-        Variables.add(self.id, mapping[type])
+        Variables.add(self.id, self.expression.eval())
 
 
 @attr.s

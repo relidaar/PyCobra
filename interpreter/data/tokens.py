@@ -14,11 +14,13 @@ token_dict = {
 
     # BOOLEAN OPERATIONS
     'EQ': r'==',
-    'NEQ': r'!=',
     'LTEQ': r'<=',
     'GTEQ': r'>=',
     'LT': r'<',
     'GT': r'>',
+    'NOT': r'not',
+    'AND': r'and',
+    'OR': r'or',
 
     # OPERATORS
     'PRINTLN': r'println',
