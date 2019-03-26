@@ -178,3 +178,19 @@ class WhileStatement:
         while self.condition.eval():
             for statement in self.body:
                 statement.eval()
+
+
+@attr.s
+class ForStatement:
+    initialization = attr.ib()
+    condition = attr.ib()
+    iteration = attr.ib()
+    body = attr.ib()
+
+    def eval(self):
+        self.initialization.eval()
+        while self.condition.eval():
+            for statement in self.body:
+                statement.eval()
+
+            self.iteration.eval()

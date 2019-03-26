@@ -5,7 +5,6 @@ token_dict = {
     'IF': r'if',
     'ELSE': r'else',
     'WHILE': r'while',
-    'DO': r'do',
     'FOR': r'for',
 
     # TYPES
@@ -40,6 +39,9 @@ token_dict = {
     'RBRACE': r'\}',
     'LPAREN': r'\(',
     'RPAREN': r'\)',
+
+    # SYMBOLS
+    'SEMICOLON': r';',
 }
 
 if __name__ == '__main__':

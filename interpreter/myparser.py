@@ -60,6 +60,11 @@ def if_statement(p):
     return ast.WhileStatement(p[1], p[3])
 
 
+@pg.production('statement : FOR statement SEMICOLON expression SEMICOLON statement LBRACE statements RBRACE')
+def if_statement(p):
+    return ast.ForStatement(p[1], p[3], p[5], p[7])
+
+
 @pg.production('expression : LPAREN expression RPAREN')
 def factor_parens(p):
     return p[1]
