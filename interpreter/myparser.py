@@ -38,17 +38,7 @@ def print_statement(p):
 
 @pg.production('statement : IDENTIFIER ASSIGNMENT expression')
 def assignment(p):
-    id = p[0].value
-    type = p[2].type
-    value = p[2].value
-
-    mapping = {
-        'Integer': int(value),
-        'Float': float(value),
-        'Boolean': value == 'True',
-    }
-
-    return ast.Assignment(id, mapping[type])
+    return ast.Assignment(p[0].value, p[2])
 
 
 @pg.production('expression : IDENTIFIER')
@@ -61,20 +51,17 @@ def get_variable(p):
 @pg.production('expression : expression MUL expression')
 @pg.production('expression : expression DIV expression')
 @pg.production('expression : expression MOD expression')
+@pg.production('expression : expression EQ expression')
+@pg.production('expression : expression NEQ expression')
+@pg.production('expression : expression LT expression')
+@pg.production('expression : expression LTEQ expression')
+@pg.production('expression : expression GT expression')
+@pg.production('expression : expression GTEQ expression')
 def calculate(p):
-    operator = p[1].gettokentype()
+    operator = p[1].value
     left = p[0]
     right = p[2]
-
-    mapping = {
-        'PLUS': ast.Add,
-        'MINUS': ast.Subtract,
-        'MUL': ast.Multiply,
-        'DIV': ast.Divide,
-        'MOD': ast.Modulo,
-    }
-
-    return mapping[operator](left, right)
+    return ast.BinaryExpression(left, right, operator)
 
 
 @pg.production('expression : INTEGER')

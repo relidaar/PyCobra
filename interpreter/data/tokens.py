@@ -12,6 +12,14 @@ token_dict = {
     'DIV': r'\/',
     'MOD': r'\%',
 
+    # BOOLEAN OPERATIONS
+    'EQ': r'==',
+    'NEQ': r'!=',
+    'LTEQ': r'<=',
+    'GTEQ': r'>=',
+    'LT': r'<',
+    'GT': r'>',
+
     # OPERATORS
     'PRINTLN': r'println',
     'PRINT': r'print',

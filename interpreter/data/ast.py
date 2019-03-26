@@ -58,34 +58,27 @@ class Boolean(Type):
 
 
 @attr.s
-class BinaryOperation:
+class BinaryExpression:
     left = attr.ib()
     right = attr.ib()
+    operator = attr.ib()
 
-
-class Add(BinaryOperation):
     def eval(self):
-        return self.left.eval() + self.right.eval()
-
-
-class Subtract(BinaryOperation):
-    def eval(self):
-        return self.left.eval() - self.right.eval()
-
-
-class Multiply(BinaryOperation):
-    def eval(self):
-        return self.left.eval() * self.right.eval()
-
-
-class Divide(BinaryOperation):
-    def eval(self):
-        return self.left.eval() / self.right.eval()
-
-
-class Modulo(BinaryOperation):
-    def eval(self):
-        return self.left.eval() % self.right.eval()
+        left = self.left.eval()
+        right = self.right.eval()
+        mapping = {
+            '+': left + right,
+            '-': left - right,
+            '*': left * right,
+            '/': left / right,
+            '==': left == right,
+            '!=': left != right,
+            '>=': left >= right,
+            '<=': left <= right,
+            '>': left > right,
+            '<': left < right,
+        }
+        return mapping[self.operator]
 
 
 @attr.s
@@ -104,10 +97,17 @@ class Print:
 @attr.s
 class Assignment:
     id = attr.ib()
-    value = attr.ib()
+    expression = attr.ib()
 
     def eval(self):
-        Variables.add(self.id, self.value)
+        type = self.expression.type
+        value = self.expression.value
+        mapping = {
+            'Integer': int(value),
+            'Float': float(value),
+            'Boolean': value == 'True',
+        }
+        Variables.add(self.id, mapping[type])
 
 
 @attr.s
@@ -116,4 +116,3 @@ class Variable:
 
     def eval(self):
         return Variables.get(self.id)
-
