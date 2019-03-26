@@ -1,7 +1,1 @@
-a = 10 not 5
-b = 10 < 5
-println a
-println b
-println a and b
-println a or b
-println a == b
+println (2 + 2) * 2

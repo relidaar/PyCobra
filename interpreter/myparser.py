@@ -12,7 +12,8 @@ pg = ParserGenerator(
         ('left', ['GT', 'GTEQ']),
         ('left', ['LT', 'LTEQ']),
         ('left', ['PLUS', 'MINUS']),
-        ('left', ['MUL', 'DIV', 'MOD'])
+        ('left', ['MUL', 'DIV', 'MOD']),
+        ('left', ['LPAREN', 'RPAREN']),
     ]
 )
 
@@ -43,6 +44,21 @@ def print_statement(p):
 @pg.production('statement : IDENTIFIER ASSIGNMENT expression')
 def assignment(p):
     return ast.Assignment(p[0].value, p[2])
+
+
+@pg.production('statement : IF expression LBRACE statements RBRACE')
+def if_statement(p):
+    return ast.IfStatement(p[1], p[3], None)
+
+
+@pg.production('statement : IF expression LBRACE statements RBRACE ELSE LBRACE statements RBRACE')
+def if_else_statement(p):
+    return ast.IfStatement(p[1], p[3], p[7])
+
+
+@pg.production('expression : LPAREN expression RPAREN')
+def factor_parens(p):
+    return p[1]
 
 
 @pg.production('expression : IDENTIFIER')

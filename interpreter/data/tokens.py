@@ -1,4 +1,10 @@
 token_dict = {
+    # OPERATORS
+    'PRINTLN': r'println',
+    'PRINT': r'print',
+    'IF': r'if',
+    'ELSE': r'else',
+
     # TYPES
     'FLOAT': r'\d+\.\d+|\-\d+\.\d+',
     'INTEGER': r'\d+|-\d+',
@@ -22,13 +28,15 @@ token_dict = {
     'AND': r'and',
     'OR': r'or',
 
-    # OPERATORS
-    'PRINTLN': r'println',
-    'PRINT': r'print',
-
     # VARIABLES
     'ASSIGNMENT': r'=',
     'IDENTIFIER': r'\w+',
+
+    # BRACKETS
+    'LBRACE': r'\{',
+    'RBRACE': r'\}',
+    'LPAREN': r'\(',
+    'RPAREN': r'\)',
 }
 
 if __name__ == '__main__':

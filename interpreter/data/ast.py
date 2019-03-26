@@ -132,6 +132,31 @@ class Print:
 
 
 @attr.s
+class If:
+    expression = attr.ib()
+    statements = attr.ib()
+
+    def eval(self):
+        if self.expression.eval():
+            return self.statements.eval()
+
+
+@attr.s
+class IfStatement:
+    condition = attr.ib()
+    body = attr.ib()
+    else_body = attr.ib()
+
+    def eval(self):
+        if self.condition.eval():
+            for statement in self.body:
+                statement.eval()
+        elif self.else_body:
+            for statement in self.else_body:
+                statement.eval()
+
+
+@attr.s
 class Assignment:
     id = attr.ib()
     expression = attr.ib()

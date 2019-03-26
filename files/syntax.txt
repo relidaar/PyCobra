@@ -34,6 +34,11 @@ if a > b {
 } else
     println 'a = b'
 
+if a > b:
+    println True
+else:
+    println False
+
 # TERNARY OPERATOR
 min = a if a < b else b
 
