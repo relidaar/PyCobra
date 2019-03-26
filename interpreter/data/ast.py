@@ -170,6 +170,22 @@ class IfStatement:
 
 
 @attr.s
+class TernaryStatement:
+    body = attr.ib()
+    condition = attr.ib()
+    else_body = attr.ib()
+
+    def eval(self):
+        value = 0
+        if self.condition.eval():
+            value = self.body.eval()
+        elif self.else_body:
+            value = self.else_body.eval()
+
+        return value
+
+
+@attr.s
 class WhileStatement:
     condition = attr.ib()
     body = attr.ib()

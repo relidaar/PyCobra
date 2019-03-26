@@ -1,9 +1,5 @@
-for i = 0; i < 10; i = i + 1 {
-    print i + " "
-}
-
-println ""
-
-for i = 10; i > 0; i = i - 1 {
-    print i + " "
-}
+a = 5
+b = 6
+println "a = " + a + ", b = " + b
+c = True if a > b else False
+println "a > b = " + c
