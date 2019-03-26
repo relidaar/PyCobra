@@ -4,6 +4,9 @@ token_dict = {
     'PRINT': r'print',
     'IF': r'if',
     'ELSE': r'else',
+    'WHILE': r'while',
+    'DO': r'do',
+    'FOR': r'for',
 
     # TYPES
     'FLOAT': r'\d+\.\d+|\-\d+\.\d+',

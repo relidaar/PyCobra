@@ -6,7 +6,6 @@ from interpreter.data.tokens import token_dict
 pg = ParserGenerator(
     token_dict.keys(),
     precedence=[
-        ('left', ['PRINTLN', 'PRINT']),
         ('left', ['AND', 'OR']),
         ('left', ['EQ', 'NOT']),
         ('left', ['GT', 'GTEQ']),
@@ -54,6 +53,11 @@ def if_statement(p):
 @pg.production('statement : IF expression LBRACE statements RBRACE ELSE LBRACE statements RBRACE')
 def if_else_statement(p):
     return ast.IfStatement(p[1], p[3], p[7])
+
+
+@pg.production('statement : WHILE expression LBRACE statements RBRACE')
+def if_statement(p):
+    return ast.WhileStatement(p[1], p[3])
 
 
 @pg.production('expression : LPAREN expression RPAREN')

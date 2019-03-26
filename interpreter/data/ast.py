@@ -138,13 +138,20 @@ class Print:
 
 
 @attr.s
-class If:
+class Assignment:
+    id = attr.ib()
     expression = attr.ib()
-    statements = attr.ib()
 
     def eval(self):
-        if self.expression.eval():
-            return self.statements.eval()
+        Variables.add(self.id, self.expression.eval())
+
+
+@attr.s
+class Variable:
+    id = attr.ib()
+
+    def eval(self):
+        return Variables.get(self.id)
 
 
 @attr.s
@@ -163,17 +170,11 @@ class IfStatement:
 
 
 @attr.s
-class Assignment:
-    id = attr.ib()
-    expression = attr.ib()
+class WhileStatement:
+    condition = attr.ib()
+    body = attr.ib()
 
     def eval(self):
-        Variables.add(self.id, self.expression.eval())
-
-
-@attr.s
-class Variable:
-    id = attr.ib()
-
-    def eval(self):
-        return Variables.get(self.id)
+        while self.condition.eval():
+            for statement in self.body:
+                statement.eval()
