@@ -8,7 +8,7 @@ pg = ParserGenerator(
     precedence=[
         ('left', ['PRINTLN', 'PRINT']),
         ('left', ['PLUS', 'MINUS']),
-        ('left', ['MUL', 'DIV'])
+        ('left', ['MUL', 'DIV', 'MOD'])
     ]
 )
 
@@ -36,6 +36,26 @@ def print_statement(p):
     return ast.Print(value, True if operator == 'PRINTLN' else False)
 
 
+@pg.production('statement : IDENTIFIER ASSIGNMENT expression')
+def assignment(p):
+    id = p[0].value
+    type = p[2].type
+    value = p[2].value
+
+    mapping = {
+        'Integer': int(value),
+        'Float': float(value),
+        'Boolean': value == 'True',
+    }
+
+    return ast.Assignment(id, mapping[type])
+
+
+@pg.production('expression : IDENTIFIER')
+def get_variable(p):
+    return ast.Variable(p[0].value)
+
+
 @pg.production('expression : expression PLUS expression')
 @pg.production('expression : expression MINUS expression')
 @pg.production('expression : expression MUL expression')
@@ -59,22 +79,22 @@ def calculate(p):
 
 @pg.production('expression : INTEGER')
 def get_integer(p):
-    return ast.Integer(p[0].value)
+    return ast.Integer('Integer', p[0].value)
 
 
 @pg.production('expression : FLOAT')
 def get_float(p):
-    return ast.Float(p[0].value)
+    return ast.Float('Float', p[0].value)
 
 
 @pg.production('expression : STRING')
 def get_string(p):
-    return ast.String(p[0].value)
+    return ast.String('String', p[0].value)
 
 
 @pg.production('expression : BOOLEAN')
 def get_boolean(p):
-    return ast.Boolean(p[0].value)
+    return ast.Boolean('Boolean', p[0].value)
 
 
 parser = pg.build()

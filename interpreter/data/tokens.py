@@ -15,6 +15,10 @@ token_dict = {
     # OPERATORS
     'PRINTLN': r'println',
     'PRINT': r'print',
+
+    # VARIABLES
+    'ASSIGNMENT': r'=',
+    'IDENTIFIER': r'\w+',
 }
 
 if __name__ == '__main__':

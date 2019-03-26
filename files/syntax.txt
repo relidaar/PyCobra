@@ -12,8 +12,8 @@ println 2 + 2 - 6 * 9 / 2
 # comment   # SINGLE-LINE COMMENT
 
 # VARIABLES
-a = 3
-b = 5.4
+var a = 3           # VARIABLE
+let b = 5.4         # CONSTANT
 println a + a - b
 
 # BOOLEAN OPERATIONS

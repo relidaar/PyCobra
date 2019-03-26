@@ -1,5 +1,7 @@
 import attr
 
+from interpreter.data.variables import Variables
+
 
 @attr.s
 class Program:
@@ -23,6 +25,7 @@ class Program:
 @attr.s
 class Type:
     """Representing the abstract type"""
+    type = attr.ib()
     value = attr.ib()
 
 
@@ -96,4 +99,21 @@ class Print:
             print(value)
         else:
             print(value, end='')
+
+
+@attr.s
+class Assignment:
+    id = attr.ib()
+    value = attr.ib()
+
+    def eval(self):
+        Variables.add(self.id, self.value)
+
+
+@attr.s
+class Variable:
+    id = attr.ib()
+
+    def eval(self):
+        return Variables.get(self.id)
 

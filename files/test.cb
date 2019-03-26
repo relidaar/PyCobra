@@ -1,1 +1,5 @@
-println  2 + 2
+a = 10
+println 5 + a / 5 * 2
+
+a = 15
+println a
