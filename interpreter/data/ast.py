@@ -55,7 +55,13 @@ class BinaryExpression:
 
 class Addition(BinaryExpression):
     def eval(self):
-        return self.left.eval() + self.right.eval()
+        left = self.left.eval()
+        right = self.right.eval()
+
+        left = str(left) if type(right).__name__ == 'str' else left
+        right = str(right) if type(left).__name__ == 'str' else right
+
+        return left + right
 
 
 class Subtraction(BinaryExpression):
