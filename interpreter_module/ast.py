@@ -1,6 +1,6 @@
 import attr
 
-from interpreter_module.data.variables import Variables
+from interpreter_module.variables import Variables
 
 
 @attr.s
@@ -16,10 +16,6 @@ class Program:
         for statement in self.statements:
             value = statement.eval()
             print('{}: {}'.format(type(value), value))
-
-    def eval_test(self):
-        for statement in self.statements:
-            return statement.eval()
 
 
 @attr.s
