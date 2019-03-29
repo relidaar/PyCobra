@@ -1,7 +1,7 @@
 from rply import ParserGenerator
 
-from interpreter.data import ast
-from interpreter.data.tokens import token_dict
+from interpreter_module.data import ast
+from lexer_module.tokens import token_dict
 
 pg = ParserGenerator(
     token_dict.keys(),

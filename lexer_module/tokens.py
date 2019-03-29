@@ -39,6 +39,8 @@ token_dict = {
     'RBRACE': r'\}',
     'LPAREN': r'\(',
     'RPAREN': r'\)',
+    'LBRACKET': r'\[',
+    'RBRACKET': r'\]',
 
     # SYMBOLS
     'SEMICOLON': r';',

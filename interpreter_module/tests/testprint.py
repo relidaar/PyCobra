@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from interpreter.lexer import lexer
+from lexer_module import lexer
 
 
 class TestLexerPrint(TestCase):

@@ -1,5 +1,5 @@
-from interpreter.lexer import lexer
-from interpreter.myparser import parser
+from lexer_module.lexer import lexer
+from interpreter_module.interpreter import parser
 
 
 def main():

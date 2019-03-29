@@ -1,6 +1,6 @@
 from rply import LexerGenerator
 
-from interpreter.data.tokens import token_dict
+from lexer_module.tokens import token_dict
 
 lg = LexerGenerator()
 

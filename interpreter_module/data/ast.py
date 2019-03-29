@@ -1,6 +1,6 @@
 import attr
 
-from interpreter.data.variables import Variables
+from interpreter_module.data.variables import Variables
 
 
 @attr.s

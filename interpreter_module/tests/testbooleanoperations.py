@@ -1,163 +1,193 @@
 from unittest import TestCase
 
-from interpreter.lexer import lexer
+from interpreter_module.lexer import lexer
 
 
-class TestLexerCalculation(TestCase):
-    def test_tokenize_plus(self):
-        # FOR TWO INTEGERS
-        input_text = '1 + 1'
+class TestLexerVariables(TestCase):
+    def test_tokenize_eq(self):
+        # FOR INTEGERS
+        input_text = '1 == 1'
         tokens = list(lexer.lex(input_text))
 
         tokens_result = ' '.join(token.gettokentype() for token in tokens)
-        result = 'INTEGER PLUS INTEGER'
+        result = 'INTEGER EQ INTEGER'
 
         self.assertEqual(tokens_result, result)
 
-        # FOR TWO FLOATS
-        input_text = '1.5 + 1.5'
+        # FOR FLOATS
+        input_text = '1.5 == 1.5'
         tokens = list(lexer.lex(input_text))
 
         tokens_result = ' '.join(token.gettokentype() for token in tokens)
-        result = 'FLOAT PLUS FLOAT'
+        result = 'FLOAT EQ FLOAT'
 
         self.assertEqual(tokens_result, result)
 
-        # FOR BOTH FLOAT AND INTEGER
-        input_text = '1 + 1.5'
+        # FOR BOTH INTEGER AND FLOAT
+        input_text = '1.5 == 1'
         tokens = list(lexer.lex(input_text))
 
         tokens_result = ' '.join(token.gettokentype() for token in tokens)
-        result = 'INTEGER PLUS FLOAT'
+        result = 'FLOAT EQ INTEGER'
 
         self.assertEqual(tokens_result, result)
 
-        # FOR TWO STRINGS
-        input_text = '"Some text " + "and another text"'
+    def test_tokenize_lt(self):
+        # FOR INTEGERS
+        input_text = '1 < 1'
         tokens = list(lexer.lex(input_text))
 
         tokens_result = ' '.join(token.gettokentype() for token in tokens)
-        result = 'STRING PLUS STRING'
+        result = 'INTEGER LT INTEGER'
 
         self.assertEqual(tokens_result, result)
 
-    def test_tokenize_minus(self):
-        # FOR TWO INTEGERS
-        input_text = '1 - 1'
+        # FOR FLOATS
+        input_text = '1.5 < 1.5'
         tokens = list(lexer.lex(input_text))
 
         tokens_result = ' '.join(token.gettokentype() for token in tokens)
-        result = 'INTEGER MINUS INTEGER'
+        result = 'FLOAT LT FLOAT'
 
         self.assertEqual(tokens_result, result)
 
-        # FOR TWO FLOATS
-        input_text = '1.5 - 1.5'
+        # FOR BOTH INTEGER AND FLOAT
+        input_text = '1.5 < 1'
         tokens = list(lexer.lex(input_text))
 
         tokens_result = ' '.join(token.gettokentype() for token in tokens)
-        result = 'FLOAT MINUS FLOAT'
+        result = 'FLOAT LT INTEGER'
 
         self.assertEqual(tokens_result, result)
 
-        # FOR BOTH FLOAT AND INTEGER
-        input_text = '1 - 1.5'
+    def test_tokenize_lteq(self):
+        # FOR INTEGERS
+        input_text = '1 <= 1'
         tokens = list(lexer.lex(input_text))
 
         tokens_result = ' '.join(token.gettokentype() for token in tokens)
-        result = 'INTEGER MINUS FLOAT'
+        result = 'INTEGER LTEQ INTEGER'
 
         self.assertEqual(tokens_result, result)
 
-    def test_tokenize_mul(self):
-        # FOR TWO INTEGERS
-        input_text = '1 * 1'
+        # FOR FLOATS
+        input_text = '1.5 <= 1.5'
         tokens = list(lexer.lex(input_text))
 
         tokens_result = ' '.join(token.gettokentype() for token in tokens)
-        result = 'INTEGER MUL INTEGER'
+        result = 'FLOAT LTEQ FLOAT'
 
         self.assertEqual(tokens_result, result)
 
-        # FOR TWO FLOATS
-        input_text = '1.5 * 1.5'
+        # FOR BOTH INTEGER AND FLOAT
+        input_text = '1.5 <= 1'
         tokens = list(lexer.lex(input_text))
 
         tokens_result = ' '.join(token.gettokentype() for token in tokens)
-        result = 'FLOAT MUL FLOAT'
+        result = 'FLOAT LTEQ INTEGER'
 
         self.assertEqual(tokens_result, result)
 
-        # FOR BOTH FLOAT AND INTEGER
-        input_text = '1 * 1.5'
+    def test_tokenize_gt(self):
+        # FOR INTEGERS
+        input_text = '1 > 1'
         tokens = list(lexer.lex(input_text))
 
         tokens_result = ' '.join(token.gettokentype() for token in tokens)
-        result = 'INTEGER MUL FLOAT'
+        result = 'INTEGER GT INTEGER'
 
         self.assertEqual(tokens_result, result)
 
-        # FOR BOTH STRING AND INTEGER
-        input_text = '"Some text" * 1'
+        # FOR FLOATS
+        input_text = '1.5 > 1.5'
         tokens = list(lexer.lex(input_text))
 
         tokens_result = ' '.join(token.gettokentype() for token in tokens)
-        result = 'STRING MUL INTEGER'
+        result = 'FLOAT GT FLOAT'
 
         self.assertEqual(tokens_result, result)
 
-    def test_tokenize_div(self):
-        # FOR TWO INTEGERS
-        input_text = '1 / 1'
+        # FOR BOTH INTEGER AND FLOAT
+        input_text = '1.5 > 1'
         tokens = list(lexer.lex(input_text))
 
         tokens_result = ' '.join(token.gettokentype() for token in tokens)
-        result = 'INTEGER DIV INTEGER'
+        result = 'FLOAT GT INTEGER'
 
         self.assertEqual(tokens_result, result)
 
-        # FOR TWO FLOATS
-        input_text = '1.5 / 1.5'
+    def test_tokenize_gteq(self):
+        # FOR INTEGERS
+        input_text = '1 >= 1'
         tokens = list(lexer.lex(input_text))
 
         tokens_result = ' '.join(token.gettokentype() for token in tokens)
-        result = 'FLOAT DIV FLOAT'
+        result = 'INTEGER GTEQ INTEGER'
 
         self.assertEqual(tokens_result, result)
 
-        # FOR BOTH FLOAT AND INTEGER
-        input_text = '1 / 1.5'
+        # FOR FLOATS
+        input_text = '1.5 >= 1.5'
         tokens = list(lexer.lex(input_text))
 
         tokens_result = ' '.join(token.gettokentype() for token in tokens)
-        result = 'INTEGER DIV FLOAT'
+        result = 'FLOAT GTEQ FLOAT'
 
         self.assertEqual(tokens_result, result)
 
-    def test_tokenize_mod(self):
-        # FOR TWO INTEGERS
-        input_text = '1 % 1'
+        # FOR BOTH INTEGER AND FLOAT
+        input_text = '1.5 >= 1'
         tokens = list(lexer.lex(input_text))
 
         tokens_result = ' '.join(token.gettokentype() for token in tokens)
-        result = 'INTEGER MOD INTEGER'
+        result = 'FLOAT GTEQ INTEGER'
 
         self.assertEqual(tokens_result, result)
 
-        # FOR TWO FLOATS
-        input_text = '1.5 % 1.5'
+    def test_tokenize_neq(self):
+        # FOR INTEGERS
+        input_text = '1 not 1'
         tokens = list(lexer.lex(input_text))
 
         tokens_result = ' '.join(token.gettokentype() for token in tokens)
-        result = 'FLOAT MOD FLOAT'
+        result = 'INTEGER NOT INTEGER'
 
         self.assertEqual(tokens_result, result)
 
-        # FOR BOTH FLOAT AND INTEGER
-        input_text = '1 % 1.5'
+        # FOR FLOATS
+        input_text = '1.5 not 1.5'
         tokens = list(lexer.lex(input_text))
 
         tokens_result = ' '.join(token.gettokentype() for token in tokens)
-        result = 'INTEGER MOD FLOAT'
+        result = 'FLOAT NOT FLOAT'
+
+        self.assertEqual(tokens_result, result)
+
+        # FOR BOTH INTEGER AND FLOAT
+        input_text = '1.5 not 1'
+        tokens = list(lexer.lex(input_text))
+
+        tokens_result = ' '.join(token.gettokentype() for token in tokens)
+        result = 'FLOAT NOT INTEGER'
+
+        self.assertEqual(tokens_result, result)
+
+    def test_tokenize_and(self):
+        # FOR INTEGERS
+        input_text = 'True and True'
+        tokens = list(lexer.lex(input_text))
+
+        tokens_result = ' '.join(token.gettokentype() for token in tokens)
+        result = 'BOOLEAN AND BOOLEAN'
+
+        self.assertEqual(tokens_result, result)
+
+    def test_tokenize_or(self):
+        # FOR INTEGERS
+        input_text = 'True or True'
+        tokens = list(lexer.lex(input_text))
+
+        tokens_result = ' '.join(token.gettokentype() for token in tokens)
+        result = 'BOOLEAN OR BOOLEAN'
 
         self.assertEqual(tokens_result, result)
