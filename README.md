@@ -46,8 +46,9 @@ if a > b {
     println 'a > b'
 } else if a < b {
     println 'a < b'
-} else
+} else {
     println 'a = b'
+}
 ``` 
 OR
 ```
